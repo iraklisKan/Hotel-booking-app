@@ -5,6 +5,7 @@ import { cities } from "../assets/assets";
 import searchIcon from '../assets/searchIcon.svg';
 
 
+
 const Hero = () => {
   return (
     <div
@@ -22,7 +23,7 @@ const Hero = () => {
         Unparalleled luxury and comfort await at the world's most exclusive
         hotels and resorts. Start your journey today.
       </p>
-      <form className='bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto mt-8 max-w-4xl'>
+      <form className='bg-white text-gray-500 rounded-lg px-6 py-4 mt-8 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto mt-8 max-w-4xl'>
 
             <div>
                 <div className='flex items-center gap-2'>
