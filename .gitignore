@@ -6,6 +6,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Root level package files (client project is in client/ folder)
+/package.json
+/package-lock.json
+
 # Build outputs
 dist/
 build/
