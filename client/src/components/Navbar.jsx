@@ -24,6 +24,8 @@ const Navbar = () => {
   
 
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {openSignIn} = useClerk();
     const {user} = useUser();
@@ -39,16 +41,33 @@ const Navbar = () => {
         setIsScrolled(prev =>location.pathname !=='/' ? true : prev);
 
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
+            const currentScrollY = window.scrollY;
+            
+            // Update scrolled state
+            setIsScrolled(currentScrollY > 10);
+            
+            // Hide/show navbar based on scroll direction
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down and past 100px
+                setIsVisible(false);
+            } else {
+                // Scrolling up or at top
+                setIsVisible(true);
+            }
+            
+            setLastScrollY(currentScrollY);
         };
+        
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [location.pathname]);
+    }, [location.pathname, lastScrollY]);
 
     return (
        
             
-            <nav className={`fixed left-0 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${isScrolled ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"}`}>
+            <nav className={`fixed left-0 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${
+                isScrolled ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"
+            } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
 
                 {/* Logo */}
                 <Link to = "/">
